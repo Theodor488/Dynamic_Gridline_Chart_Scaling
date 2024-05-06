@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dynamic_Gridline_Chart_Scaling
 {
+    
     public class DrawChart
     {
-        public void Draw(double width, double height, double xMin=0, double xMax = 100, double yMin = 0, double yMax = 100) 
+        public List<GridPoint> Draw(double width, double height, double xMin=0, double xMax = 100, double yMin = 0, double yMax = 100) 
         {
             Console.WriteLine($"Chart Initialized: \nWidth: {width}, Height: {height}. \nMin x: {xMin}, Max x: {xMax} \nMin y: {yMin}, Max y: {yMax}");
 
@@ -38,6 +39,8 @@ namespace Dynamic_Gridline_Chart_Scaling
 
                 gridLinePositions.Add(gridPoint);
             }
+
+            return gridLinePositions;
         }
 
         public double CalculatePos(double currentPos, double intervalBetweenGridLines)
