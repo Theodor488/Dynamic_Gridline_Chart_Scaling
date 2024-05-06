@@ -17,18 +17,19 @@ namespace Dynamic_Gridline_Chart_Scaling
 
         public List<GridPoint> GetNeighborsWithinMinDistance(List<GridPoint> gridLinePositions, GridPoint currentGridPoint, double minNeighborDistance)
         {
-            List<GridPoint> NeighborsWithinMinDistanceAllowed = new List<GridPoint> ();
+            List<GridPoint> neighborsWithinMinDistanceAllowed = new List<GridPoint> ();
 
             foreach (GridPoint gridPoint in gridLinePositions) 
             {
-                if (gridPoint != currentGridPoint)
+                // Check only if gridPoint label is shown and it is not the current gridPoint
+                if (gridPoint != currentGridPoint && gridPoint.ShowLabel)
                 {
                     double distance = CalculateNearestNeighborDistance(gridPoint.xAxis, currentGridPoint.xAxis, gridPoint.yAxis, currentGridPoint.yAxis);
                     
                     // if distance between neighbors is within minimum neighbor distance then add to list 
                     if (distance < minNeighborDistance)
                     {
-                        
+                        gridPoint.ShowLabel = false;
                     }
                 }
             }

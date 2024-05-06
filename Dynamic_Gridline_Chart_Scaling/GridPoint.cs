@@ -10,7 +10,6 @@ namespace Dynamic_Gridline_Chart_Scaling
     {
         public double xAxis { get; set; }
         public double yAxis { get; set; }
-        public double NearestNeighborDistance { get; set; }
         public bool ShowLabel { get; set; }
     }
 }
