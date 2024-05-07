@@ -13,11 +13,8 @@ namespace Dynamic_Gridline_Chart_Scaling
 
             foreach (GridPoint gridPoint in gridLinePositions)
             {
-                // TODO figure out how to update gridPointsWithinMinDistance instead of just recreating it
-                List<GridPoint> gridPointsWithinMinDistance = dynamicSizing.GetNeighborsWithinMaxDistance(gridLinePositions, gridPoint, 5);
+                dynamicSizing.GetNeighborsWithinMaxDistance(gridLinePositions, gridPoint, 25);
             }
-
-            
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Dynamic_Gridline_Chart_Scaling
 
                 gridPoint.xAxis = currentXPos;
                 gridPoint.yAxis = currentYPos;
+                gridPoint.ShowLabel = true;
 
                 Console.WriteLine($"GridPoint {i}: {gridPoint.xAxis}/{gridPoint.yAxis}");
 
