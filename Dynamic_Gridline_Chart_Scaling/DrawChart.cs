@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Dynamic_Gridline_Chart_Scaling
 {
-    
     public class DrawChart
     {
         public List<GridPoint> Draw(double width, double height, double xMin=0, double xMax = 100, double yMin = 0, double yMax = 100) 
@@ -17,7 +16,7 @@ namespace Dynamic_Gridline_Chart_Scaling
             double total_yRange = yMax - yMin;
 
             // total_xRange / number of gridPoints
-            double xIntervalBetweenGridLines = total_xRange / 10; 
+            double xIntervalBetweenGridLines = total_xRange / 10;
             double yIntervalBetweenGridLines = total_yRange / 10;
 
             List<GridPoint> gridLinePositions = new List<GridPoint>();
@@ -26,25 +25,27 @@ namespace Dynamic_Gridline_Chart_Scaling
 
             for (int i=0; i<10; i++)
             {
-                GridPoint gridPoint = new GridPoint();
-
-                // Update x / y positions with intervals
-                currentXPos = CalculatePos(currentXPos, xIntervalBetweenGridLines);
-                currentYPos = CalculatePos(currentYPos, yIntervalBetweenGridLines);
-
-                gridPoint.xAxis = currentXPos;
-                gridPoint.yAxis = currentYPos;
-                gridPoint.ShowLabel = true;
-
-                Console.WriteLine($"GridPoint {i}: {gridPoint.xAxis}/{gridPoint.yAxis}");
-
-                gridLinePositions.Add(gridPoint);
+                SetGridPoint(xIntervalBetweenGridLines, yIntervalBetweenGridLines, gridLinePositions, ref currentXPos, ref currentYPos, i);
             }
 
             return gridLinePositions;
         }
 
-        public double CalculatePos(double currentPos, double intervalBetweenGridLines)
+        private void SetGridPoint(double xIntervalBetweenGridLines, double yIntervalBetweenGridLines, List<GridPoint> gridLinePositions, ref double currentXPos, ref double currentYPos, int i)
+        {
+            GridPoint gridPoint = new GridPoint();
+
+            // Update x / y positions with intervals
+            gridPoint.xAxis = CalculatePosition(currentXPos, xIntervalBetweenGridLines); ;
+            gridPoint.yAxis = CalculatePosition(currentYPos, yIntervalBetweenGridLines); ;
+            gridPoint.ShowLabel = true;
+
+            Console.WriteLine($"GridPoint {i}: {gridPoint.xAxis}/{gridPoint.yAxis}");
+
+            gridLinePositions.Add(gridPoint);
+        }
+
+        public double CalculatePosition(double currentPos, double intervalBetweenGridLines)
         {
             currentPos += intervalBetweenGridLines;
             return currentPos;
