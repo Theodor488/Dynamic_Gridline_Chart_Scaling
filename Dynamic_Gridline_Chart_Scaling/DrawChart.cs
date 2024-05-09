@@ -25,30 +25,25 @@ namespace Dynamic_Gridline_Chart_Scaling
 
             for (int i=0; i<10; i++)
             {
-                SetGridPoint(xIntervalBetweenGridLines, yIntervalBetweenGridLines, gridLinePositions, ref currentXPos, ref currentYPos, i);
+                GridPoint gridPoint = new GridPoint();
+                SetGridPoint(gridPoint, xIntervalBetweenGridLines, yIntervalBetweenGridLines, gridLinePositions, ref currentXPos, ref currentYPos, i);
             }
 
             return gridLinePositions;
         }
 
-        private void SetGridPoint(double xIntervalBetweenGridLines, double yIntervalBetweenGridLines, List<GridPoint> gridLinePositions, ref double currentXPos, ref double currentYPos, int i)
+        private void SetGridPoint(GridPoint gridPoint, double xIntervalBetweenGridLines, double yIntervalBetweenGridLines, List<GridPoint> gridLinePositions, ref double currentXPos, ref double currentYPos, int i)
         {
-            GridPoint gridPoint = new GridPoint();
-
             // Update x / y positions with intervals
-            gridPoint.xAxis = CalculatePosition(currentXPos, xIntervalBetweenGridLines); ;
-            gridPoint.yAxis = CalculatePosition(currentYPos, yIntervalBetweenGridLines); ;
+            gridPoint.xAxis = currentXPos;
+            gridPoint.yAxis = currentYPos;
             gridPoint.ShowLabel = true;
 
-            Console.WriteLine($"GridPoint {i}: {gridPoint.xAxis}/{gridPoint.yAxis}");
-
             gridLinePositions.Add(gridPoint);
-        }
 
-        public double CalculatePosition(double currentPos, double intervalBetweenGridLines)
-        {
-            currentPos += intervalBetweenGridLines;
-            return currentPos;
+            // Increment the coords
+            currentXPos += xIntervalBetweenGridLines;
+            currentYPos += yIntervalBetweenGridLines;
         }
     }
 }

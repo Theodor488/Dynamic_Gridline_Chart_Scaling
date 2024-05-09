@@ -20,7 +20,7 @@ namespace Dynamic_Gridline_Chart_Scaling
             foreach (GridPoint gridPoint in gridLinePositions) 
             {
                 // Check only if gridPoint label is shown and it is not the current gridPoint
-                if (currentGridPoint.ShowLabel && gridPoint != currentGridPoint)
+                if (currentGridPoint.ShowLabel && gridPoint.xAxis != currentGridPoint.xAxis && gridPoint.yAxis != currentGridPoint.yAxis)
                 {
                     double distance = CalculateNeighborDistance(gridPoint.xAxis, gridPoint.yAxis, currentGridPoint.xAxis, currentGridPoint.yAxis);
                     
