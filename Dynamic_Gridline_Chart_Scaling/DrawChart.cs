@@ -8,7 +8,7 @@ namespace Dynamic_Gridline_Chart_Scaling
 {
     public class DrawChart
     {
-        public List<GridPoint> Draw(double width, double height, double xMin=0, double xMax = 100, double yMin = 0, double yMax = 100) 
+        public List<GridPoint> Draw(double width, double height, int numOfGridPoints, double xMin=0, double xMax = 100, double yMin = 0, double yMax = 100) 
         {
             Console.WriteLine($"Chart Initialized: \nWidth: {width}, Height: {height}. \nMin x: {xMin}, Max x: {xMax} \nMin y: {yMin}, Max y: {yMax}");
 
@@ -16,8 +16,8 @@ namespace Dynamic_Gridline_Chart_Scaling
             double total_yRange = yMax - yMin;
 
             // total_xRange / number of gridPoints
-            double xIntervalBetweenGridLines = total_xRange / 10;
-            double yIntervalBetweenGridLines = total_yRange / 10;
+            double xIntervalBetweenGridLines = total_xRange / numOfGridPoints;
+            double yIntervalBetweenGridLines = total_yRange / numOfGridPoints;
 
             List<GridPoint> gridLinePositions = new List<GridPoint>();
             double currentXPos = xMin;

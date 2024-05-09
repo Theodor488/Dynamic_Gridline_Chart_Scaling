@@ -9,13 +9,19 @@ namespace Dynamic_Gridline_Chart_Scaling
             DrawChart drawChart = new DrawChart();
             DynamicSizing dynamicSizing = new DynamicSizing();
 
-            List<GridPoint> gridLinePositions = drawChart.Draw(100, 100);
+            double chartWidth = 100;
+            double chartHeight = 100;
+            int numOfGridPoints = 10;
+            int minNeighborDistance = 25;
 
-            Console.WriteLine();
+            List<GridPoint> gridLinePositions = drawChart.Draw(chartWidth, chartHeight, numOfGridPoints);
+
+            Console.WriteLine($"\nNumber of GridPoints: {numOfGridPoints}");
+            Console.WriteLine($"Minimum allowed distance between GridPoints: {minNeighborDistance}\n");
 
             foreach (GridPoint gridPoint in gridLinePositions)
             {
-                dynamicSizing.GetNeighborsWithinMaxDistance(gridLinePositions, gridPoint, 25);
+                dynamicSizing.GetNeighborsWithinMaxDistance(gridLinePositions, gridPoint, minNeighborDistance);
                 Console.WriteLine($"GridPoint: {gridPoint.xAxis}/{gridPoint.yAxis} LabelShown: {gridPoint.ShowLabel}");
             }
         }
