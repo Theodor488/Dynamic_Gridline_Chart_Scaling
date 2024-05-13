@@ -11,7 +11,7 @@ namespace Dynamic_Gridline_Chart_Scaling
 
             double chartWidth = 100;
             double chartHeight = 100;
-            int numOfGridPoints = 10;
+            int numOfGridPoints = 8;
             int minNeighborDistance = 25;
 
             List<GridPoint> gridLinePositions = drawChart.Draw(chartWidth, chartHeight, numOfGridPoints);
@@ -22,7 +22,7 @@ namespace Dynamic_Gridline_Chart_Scaling
             foreach (GridPoint gridPoint in gridLinePositions)
             {
                 dynamicSizing.GetNeighborsWithinMaxDistance(gridLinePositions, gridPoint, minNeighborDistance);
-                Console.WriteLine($"GridPoint: {gridPoint.xAxis}/{gridPoint.yAxis} LabelShown: {gridPoint.ShowLabel}");
+                Console.WriteLine($"GridPoint: {gridPoint.xAxis}/{gridPoint.yAxis} LabelShown: {gridPoint.ShowLabel}, NearestNeighborDistance: {gridPoint.DistanceToNearestNeighbor}, NearestNeighbor: {gridPoint.NearestNeighborXAxis}/{gridPoint.NearestNeighborYAxis}");
             }
         }
     }

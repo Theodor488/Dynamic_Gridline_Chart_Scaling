@@ -17,19 +17,37 @@ namespace Dynamic_Gridline_Chart_Scaling
 
         public void GetNeighborsWithinMaxDistance(List<GridPoint> gridLinePositions, GridPoint currentGridPoint, double minNeighborDistance)
         {
+            double nearestNeighbor_XAxis = Double.MaxValue;
+            double nearestNeighbor_YAxis = Double.MaxValue;
+            double nearestNeighborDistance = Double.MaxValue;
+
             foreach (GridPoint gridPoint in gridLinePositions) 
             {
                 // Check only if gridPoint label is shown and it is not the current gridPoint
-                if (currentGridPoint.ShowLabel && gridPoint.xAxis != currentGridPoint.xAxis && gridPoint.yAxis != currentGridPoint.yAxis)
+                if (currentGridPoint.ShowLabel && !gridPoint.Equals(currentGridPoint)) 
                 {
                     double distance = CalculateNeighborDistance(gridPoint.xAxis, gridPoint.yAxis, currentGridPoint.xAxis, currentGridPoint.yAxis);
-                    
-                    // If distance between neighbors is within minimum then remove label
-                    if (distance < minNeighborDistance)
+
+                    nearestNeighborDistance = CalculateNeighborDistance(nearestNeighbor_XAxis, nearestNeighbor_YAxis, currentGridPoint.xAxis, currentGridPoint.yAxis);
+
+                    if (distance < nearestNeighborDistance) 
                     {
-                        gridPoint.ShowLabel = false;
+                        nearestNeighborDistance = distance;
+                        nearestNeighbor_XAxis = gridPoint.xAxis;
+                        nearestNeighbor_YAxis = gridPoint.yAxis;
+                        currentGridPoint.NearestNeighborXAxis = nearestNeighbor_XAxis;
+                        currentGridPoint.NearestNeighborYAxis = nearestNeighbor_YAxis;
                     }
+
+                    currentGridPoint.DistanceToNearestNeighbor = Math.Round(nearestNeighborDistance, 2);
+
                 }
+            }
+
+            // If distance between neighbors is within minimum then remove label
+            if (nearestNeighborDistance < minNeighborDistance)
+            {
+                currentGridPoint.ShowLabel = false;
             }
         }
     }
